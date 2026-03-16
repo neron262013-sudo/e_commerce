@@ -4,10 +4,11 @@ def test_product_init(first_product):
     assert first_product.price == 180000.0
     assert first_product.quantity == 5
 
+
 def test_category_init(first_category):
     assert first_category.name == "Смартфоны"
     assert first_category.description == ("Смартфоны, как средство не только коммуникации, "
-                                            "но и получения дополнительных функций для удобства жизни")
+                                          "но и получения дополнительных функций для удобства жизни")
 
 
 def test_category_counters(first_category, second_category):
