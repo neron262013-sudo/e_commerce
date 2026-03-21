@@ -1,4 +1,7 @@
+import pytest
+
 from src.classes import Product
+from tests.conftest import first_category
 
 
 def test_product_init(first_product):
@@ -22,6 +25,14 @@ def test_product_new_product_method(first_product_dict):
     assert product.description == "256GB, Серый цвет, 200MP камера"
     assert product.price == 180000.0
     assert product.quantity == 5
+
+
+def test_product_str(first_product):
+    assert str(first_product) == "Samsung Galaxy S23 Ultra, 180000.0 руб. Остаток: 5 шт"
+
+
+def test_product_add(first_product, second_product):
+    assert (first_product + second_product) == 2580000.0
 
 
 def test_category_init(first_category):
@@ -57,3 +68,17 @@ def test_category_add_product_method(first_category, second_product):
 def test_category_products_method(second_category):
     products = second_category.products
     assert products == "55\" QLED 4K, 123000.0 руб. Остаток: 7 шт.\n"
+
+
+def test_category_str(first_category):
+    assert str(first_category) == "Смартфоны, количество продуктов: 27 шт."
+
+
+def test_category_iter(category_iterator):
+    iter(category_iterator)
+    assert category_iterator.index == 0
+    assert next(category_iterator).name == "Samsung Galaxy S23 Ultra"
+    assert next(category_iterator).name == "Iphone 15"
+    assert next(category_iterator).name == "Xiaomi Redmi Note 11"
+    with pytest.raises(StopIteration):
+        next(category_iterator)

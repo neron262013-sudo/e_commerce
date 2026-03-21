@@ -76,7 +76,7 @@ class Category:
         return self.__products
 
 
-class ProductIterator:
+class CategoryIterator:
     def __init__(self, category_obj):
         self.category = category_obj
         self.index = 0
