@@ -56,4 +56,4 @@ def test_category_add_product_method(first_category, second_product):
 
 def test_category_products_method(second_category):
     products = second_category.products
-    assert products == "55\" QLED 4K, 123000.0 руб, Остаток: 7 шт.\n"
+    assert products == "55\" QLED 4K, 123000.0 руб. Остаток: 7 шт.\n"
