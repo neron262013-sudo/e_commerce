@@ -51,11 +51,15 @@ category1 = Category("Смартфоны",
                      "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
                      [product1, product2, product3])
 ```
+3. Создать объект из класса CategoryIterator. (classes.py)
+```
+my_iterator = CategoryIterator(category1)
+```
 ## Класс Product.
 
 Код для примера работы функционала в разделе "Код для примера работы"
 
-1. self метод price устанавливает цену если она больше 0
+2. self метод price устанавливает цену если она больше 0
 
 ```
 new_product.price = 800
@@ -66,7 +70,7 @@ new_product.price = 0
 print(new_product.price)
 ```
 
-2. cls метод new_product добавляет новый продукт из словаря
+3. cls метод new_product добавляет новый продукт из словаря
 
 ```
 new_product = Product.new_product({"name": "Samsung Galaxy S23 Ultra",
@@ -74,6 +78,22 @@ new_product = Product.new_product({"name": "Samsung Galaxy S23 Ultra",
                                    "price": 180000.0,
                                    "quantity": 5
                                    })
+```
+
+4. __str__ метод выводит описание продукта в формате "Название продукта, 80 руб. Остаток: 15 шт"
+
+```
+product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+
+print(str(product2))
+```
+
+5. __add__ метод складывает общую сумму всего количества двух продуктов
+```
+product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
+
+print(product2 + product3)
 ```
 
 ## Класс Category.
@@ -93,12 +113,50 @@ category1.add_product(product4)
 print(category1.products)
 ```
 
+3. __str__ метод выводит описание категории в формате "Название категории, количество продуктов: 200 шт."
+```
+product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
+
+category1 = Category(
+    "Смартфоны",
+    "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
+    [product1, product2, product3]
+)
+
+print(str(category1))
+```
+
+## Класс CategoryIterator
+
+Код для примера работы функционала в разделе "Код для примера работы"
+
+1. __iter__ метод устанавливает счетчик индекса на 0
+
+2. __next__ метод перебирает продукты из категории.
+```
+product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
+
+category1 = Category(
+    "Смартфоны",
+    "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
+    [product1, product2, product3]
+)
+
+my_iterator = CategoryIterator(category1)
+
+for product in my_iterator:
+    print(product)
+```
 ## Код для примера работы
 
 Код нужно расположить в файле main.py в корневой директории
 
 ```
-from src.classes import Product, Category
+from src.classes import Product, Category, CategoryIterator
 
 if __name__ == "__main__":
     product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
@@ -132,6 +190,23 @@ if __name__ == "__main__":
     print(new_product.price)
     new_product.price = 0
     print(new_product.price)
+    
+    print(str(product1))
+    print(str(product2))
+    print(str(product3))
+    
+    print(str(category1))
+
+    print(category1.products)
+
+    print(product1 + product2)
+    print(product1 + product3)
+    print(product2 + product3)
+    
+    my_iterator = CategoryIterator(category1)
+
+    for product in my_iterator:
+        print(product)
 ```
 
 ## Тестирование

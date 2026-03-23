@@ -1,6 +1,6 @@
 import pytest
 
-from src.classes import Category, Product
+from src.classes import Category, Product, CategoryIterator
 
 
 @pytest.fixture(autouse=True)
@@ -61,3 +61,8 @@ def second_category():
                                       "Фоновая подсветка",
                                       123000.0,
                                       7)])
+
+
+@pytest.fixture()
+def category_iterator(first_category):
+    return CategoryIterator(first_category)
