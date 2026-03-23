@@ -11,24 +11,23 @@ class Product:
         self.__price = price
         self.quantity = quantity
 
-
     # Метод форматирования вывода информации о продукте print(str(product1))
     # Формат вывода "Название продукта, 80 руб. Остаток: 15 шт."
     def __str__(self):
         return f"{self.name}, {self.price} руб. Остаток: {self.quantity} шт"
 
-
     # Метод сложения суммы двух продуктов с учетом их количества
     # Формула (цена прод1 * кол-во прод1 + цена прод2 * кол-во прод2)
     def __add__(self, other):
-        return self.price * self.quantity + other.price * other.quantity
-
+        if type(other) is Product:
+            return self.price * self.quantity + other.price * other.quantity
+        else:
+            raise TypeError
 
     # Геттер price
     @property
     def price(self):
         return self.__price
-
 
     # Сеттер price. Если цена не 0 или отрицательная, то задаем цену. Иначе принтим предупреждение.
     @price.setter
@@ -38,7 +37,6 @@ class Product:
             return
         else:
             self.__price = price
-
 
     # Метод класса, создающий новый объект класса Product
     @classmethod
@@ -64,7 +62,6 @@ class Category:
         Category.category_count += 1
         Category.product_count += len(self.__products)
 
-
     # Метод форматирования вывода информации о классе print(str(category1))
     # Формат вывода "Название категории, количество продуктов: 200 шт."
     def __str__(self):
@@ -75,12 +72,13 @@ class Category:
         # Затем, возвращаем сообщение
         return f"{self.name}, количество продуктов: {all_products_quantity} шт."
 
-
     # Добавляем продукт в список продуктов и увеличиваем счетчик количества продуктов
     def add_product(self, product: Product):
-        self.__products.append(product)
-        Category.product_count += 1
-
+        if isinstance(product, Product):
+            self.__products.append(product)
+            Category.product_count += 1
+        else:
+            raise TypeError
 
     # Геттер списка товаров в текстовом виде
     @property
@@ -89,7 +87,6 @@ class Category:
         for product in self.__products:
             products_str += f"{str(product)}.\n"
         return products_str
-
 
     # Геттер, в котором содержится сам список товаров (в виде list)
     @property
@@ -103,12 +100,10 @@ class CategoryIterator:
         self.category = category_obj
         self.index = 0
 
-
     # Получение итератора. Сбрасывает индекс списка на 0.
     def __iter__(self):
         self.index = 0
         return self
-
 
     # Получение следующего значения итератора из списка продуктов. Увеличивает индекс на 1.
     def __next__(self):
@@ -118,3 +113,34 @@ class CategoryIterator:
             return product
         else:
             raise StopIteration
+
+
+class Smartphone(Product):
+
+    def __init__(self, name, description, price, quantity, efficiency, model, memory, color):
+        super().__init__(name, description, price, quantity)
+        self.efficiency = efficiency
+        self.model = model
+        self.memory = memory
+        self.color = color
+
+    def __add__(self, other):
+        if type(other) is Smartphone:
+            return self.price * self.quantity + other.price * other.quantity
+        else:
+            raise TypeError
+
+
+class LawnGrass(Product):
+
+    def __init__(self, name, description, price, quantity, country, germination_period, color):
+        super().__init__(name, description, price, quantity)
+        self.country = country
+        self.germination_period = germination_period
+        self.color = color
+
+    def __add__(self, other):
+        if type(other) is LawnGrass:
+            return self.price * self.quantity + other.price * other.quantity
+        else:
+            raise TypeError
