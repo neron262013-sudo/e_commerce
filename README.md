@@ -40,20 +40,43 @@ pip install -r requirements.txt
 
 
 ## Использование
-1. Создать объект из класса Product. (classes.py)
+1. Создать объект класса Product. (classes.py)
 ```
 product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
 ```
 
-2. Создать объект из класса Category. (classes.py)
+2. Создать объект класса Category. (classes.py)
 ```
 category1 = Category("Смартфоны",
                      "Смартфоны, как средство не только коммуникации, но и получения дополнительных функций для удобства жизни",
                      [product1, product2, product3])
 ```
-3. Создать объект из класса CategoryIterator. (classes.py)
+3. Создать объект класса CategoryIterator. (classes.py)
 ```
 my_iterator = CategoryIterator(category1)
+```
+
+4. Создать объект класса Smartphone. Наследуется из класса Product. (classes.py)
+```
+smartphone1 = Smartphone("Samsung Galaxy S23 Ultra",
+                        "256GB, Серый цвет, 200MP камера",
+                        180000.0,
+                        5,
+                        95.5,
+                        "S23 Ultra",
+                        256,
+                        "Серый")
+```
+
+5. Создать объект класса LawnGrass. Наследуется из класса Product. (classes.py)
+```
+grass1 = LawnGrass("Газонная трава",
+                     "Элитная трава для газона",
+                     500.0,
+                     20,
+                     "Россия",
+                     "7 дней",
+                     "Зеленый")
 ```
 ## Класс Product.
 
@@ -89,6 +112,7 @@ print(str(product2))
 ```
 
 5. __add__ метод складывает общую сумму всего количества двух продуктов
+- Проводит проверку, что добавляется объект того же класса. Если нет, то TypeError
 ```
 product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
 product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
@@ -101,6 +125,8 @@ print(product2 + product3)
 Код для примера работы функционала в разделе "Код для примера работы"
 
 1. Метод add_product добавляет продукт класса Product в список продуктов и увеличивает счетчик продуктов на 1
+- проверяет, что добавляется объект класса Product или наследник.
+
 
 ```
 product4 = Product("55\" QLED 4K", "Фоновая подсветка", 123000.0, 7)
@@ -151,6 +177,20 @@ my_iterator = CategoryIterator(category1)
 for product in my_iterator:
     print(product)
 ```
+
+## Класс Smartphones
+Наследуется из класса Product. Дополнительные параметры:
+- efficiency
+- model
+- memory
+- color
+
+## Класс LawnGrass
+Наследуется из класса Product. Дополнительные параметры:
+- country
+- germination_period
+- color
+
 ## Код для примера работы
 
 Код нужно расположить в файле main.py в корневой директории

@@ -1,7 +1,6 @@
 import pytest
 
 from src.classes import Product
-from tests.conftest import first_category
 
 
 def test_product_init(first_product):
@@ -35,6 +34,11 @@ def test_product_add(first_product, second_product):
     assert (first_product + second_product) == 2580000.0
 
 
+def test_product_add_exception(first_product):
+    with pytest.raises(TypeError):
+        first_product + 1
+
+
 def test_category_init(first_category):
     assert first_category.name == "Смартфоны"
     assert first_category.description == ("Смартфоны, как средство не только коммуникации, "
@@ -65,6 +69,11 @@ def test_category_add_product_method(first_category, second_product):
     assert first_category.product_count == 4
 
 
+def test_dd_product_add_product_exception(first_category):
+    with pytest.raises(TypeError):
+        first_category + 1
+
+
 def test_category_products_method(second_category):
     products = second_category.products
     assert products == "55\" QLED 4K, 123000.0 руб. Остаток: 7 шт.\n"
@@ -82,3 +91,46 @@ def test_category_iter(category_iterator):
     assert next(category_iterator).name == "Xiaomi Redmi Note 11"
     with pytest.raises(StopIteration):
         next(category_iterator)
+
+
+def test_smartphone_init(first_smartphone):
+    assert first_smartphone.name == "Samsung Galaxy S23 Ultra"
+    assert first_smartphone.description == "256GB, Серый цвет, 200MP камера"
+    assert first_smartphone.price == 180000.0
+    assert first_smartphone.quantity == 5
+    assert first_smartphone.efficiency == 95.5
+    assert first_smartphone.model == "S23 Ultra"
+    assert first_smartphone.memory == 256
+    assert first_smartphone.color == "Серый"
+
+
+def test_smartphone_add(first_smartphone, second_smartphone):
+    assert first_smartphone + second_smartphone == 2580000.0
+
+
+def test_smartphone_add_exception(first_smartphone, first_lawn_grass):
+    with pytest.raises(TypeError):
+        first_smartphone + 1
+    with pytest.raises(TypeError):
+        first_smartphone + first_lawn_grass
+
+
+def test_lawn_grass_init(first_lawn_grass):
+    assert first_lawn_grass.name == "Газонная трава"
+    assert first_lawn_grass.description == "Элитная трава для газона"
+    assert first_lawn_grass.price == 500.0
+    assert first_lawn_grass.quantity == 20
+    assert first_lawn_grass.country == "Россия"
+    assert first_lawn_grass.germination_period == "7 дней"
+    assert first_lawn_grass.color == "Зеленый"
+
+
+def test_lawn_grass_add(first_lawn_grass, second_lawn_grass):
+    assert first_lawn_grass + second_lawn_grass == 16750.0
+
+
+def test_lawn_grass_add_exception(first_lawn_grass, first_smartphone):
+    with pytest.raises(TypeError):
+        first_lawn_grass + 1
+    with pytest.raises(TypeError):
+        first_lawn_grass + first_smartphone
