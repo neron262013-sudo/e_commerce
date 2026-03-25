@@ -136,7 +136,6 @@ def test_lawn_grass_add_exception(first_lawn_grass, first_smartphone):
         first_lawn_grass + first_smartphone
 
 
-
 def test_mixin_info_print(capsys):
     Product(name="Samsung Galaxy S23 Ultra",
             description="256GB, Серый цвет, 200MP камера",
