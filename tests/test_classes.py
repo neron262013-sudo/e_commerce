@@ -142,7 +142,7 @@ def test_mixin_info_print(capsys):
             price=180000.0,
             quantity=5)
     message = capsys.readouterr()
-    assert message.out.strip() == "Product, 256GB, Серый цвет, 200MP камера, 180000.0, 5"
+    assert message.out.strip() == "Product(Samsung Galaxy S23 Ultra, 256GB, Серый цвет, 200MP камера, 180000.0, 5)"
 
     Smartphone("Samsung Galaxy S23 Ultra",
                "256GB, Серый цвет, 200MP камера",
@@ -153,7 +153,7 @@ def test_mixin_info_print(capsys):
                256,
                "Серый")
     message = capsys.readouterr()
-    assert message.out.strip() == "Smartphone, 256GB, Серый цвет, 200MP камера, 180000.0, 5"
+    assert message.out.strip() == "Smartphone(Samsung Galaxy S23 Ultra, 256GB, Серый цвет, 200MP камера, 180000.0, 5)"
 
     LawnGrass("Газонная трава",
               "Элитная трава для газона",
@@ -163,4 +163,4 @@ def test_mixin_info_print(capsys):
               "7 дней",
               "Зеленый")
     message = capsys.readouterr()
-    assert message.out.strip() == "LawnGrass, Элитная трава для газона, 500.0, 20"
+    assert message.out.strip() == "LawnGrass(Газонная трава, Элитная трава для газона, 500.0, 20)"
