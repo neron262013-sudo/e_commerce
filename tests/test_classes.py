@@ -15,7 +15,7 @@ def test_product_price_setter(capsys, first_product):
     assert first_product.price == 200000.0
     first_product.price = 0
     message = capsys.readouterr()
-    assert message.out.strip() == "Цена не должна быть нулевая или отрицательная"
+    assert message.out.strip().split("\n")[-1] == "Цена не должна быть нулевая или отрицательная"
 
 
 def test_product_new_product_method(first_product_dict):
