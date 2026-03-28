@@ -65,6 +65,11 @@ def second_category():
 
 
 @pytest.fixture()
+def no_products_category():
+    return Category("Пустая категория", "Категория без продуктов", [])
+
+
+@pytest.fixture()
 def category_iterator(first_category):
     return CategoryIterator(first_category)
 

@@ -39,6 +39,14 @@ def test_product_add_exception(first_product):
         first_product + 1
 
 
+def test_product_empty_quantity():
+    with pytest.raises(ValueError):
+        Product("Бракованный товар",
+                "Неверное количество",
+                1000.0,
+                0)
+
+
 def test_category_init(first_category):
     assert first_category.name == "Смартфоны"
     assert first_category.description == ("Смартфоны, как средство не только коммуникации, "
@@ -91,6 +99,11 @@ def test_category_iter(category_iterator):
     assert next(category_iterator).name == "Xiaomi Redmi Note 11"
     with pytest.raises(StopIteration):
         next(category_iterator)
+
+
+def test_category_middle_price(first_category, no_products_category):
+    assert first_category.middle_price() == 140333.33333333334
+    assert no_products_category.middle_price() == 0
 
 
 def test_smartphone_init(first_smartphone):
