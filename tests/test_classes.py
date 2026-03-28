@@ -1,6 +1,7 @@
 import pytest
 
 from src.classes import Product, Smartphone, LawnGrass
+from tests.conftest import first_category
 
 
 def test_product_init(first_product):
@@ -37,6 +38,14 @@ def test_product_add(first_product, second_product):
 def test_product_add_exception(first_product):
     with pytest.raises(TypeError):
         first_product + 1
+
+
+def test_product_empty_quantity():
+    with pytest.raises(ValueError):
+        Product("Бракованный товар",
+                "Неверное количество",
+                1000.0,
+                0)
 
 
 def test_category_init(first_category):
@@ -91,6 +100,11 @@ def test_category_iter(category_iterator):
     assert next(category_iterator).name == "Xiaomi Redmi Note 11"
     with pytest.raises(StopIteration):
         next(category_iterator)
+
+
+def test_category_middle_price(first_category, no_products_category):
+    assert first_category.middle_price() == 140333.33333333334
+    assert no_products_category.middle_price() == 0
 
 
 def test_smartphone_init(first_smartphone):
