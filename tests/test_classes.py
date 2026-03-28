@@ -1,7 +1,6 @@
 import pytest
 
 from src.classes import Product, Smartphone, LawnGrass
-from tests.conftest import first_category
 
 
 def test_product_init(first_product):
