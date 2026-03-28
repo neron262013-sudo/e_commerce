@@ -91,6 +91,8 @@ grass1 = LawnGrass("Газонная трава",
 
 Код для примера работы функционала в разделе "Код для примера работы"
 
+1. При инициализации проверяется, что количество больше 0. Если меньше или 0, то ошибка.
+
 2. self метод price устанавливает цену если она больше 0
 
 ```
@@ -161,6 +163,20 @@ category1 = Category(
 )
 
 print(str(category1))
+```
+
+4. Метод middle_price считает среднюю цену товаров. Если товаров нет, то средняя устанавливается 0.
+```
+    product1 = Product("Samsung Galaxy S23 Ultra", "256GB, Серый цвет, 200MP камера", 180000.0, 5)
+    product2 = Product("Iphone 15", "512GB, Gray space", 210000.0, 8)
+    product3 = Product("Xiaomi Redmi Note 11", "1024GB, Синий", 31000.0, 14)
+
+    category1 = Category("Смартфоны", "Категория смартфонов", [product1, product2, product3])
+
+    print(category1.middle_price())
+
+    category_empty = Category("Пустая категория", "Категория без продуктов", [])
+    print(category_empty.middle_price())
 ```
 
 ## Класс CategoryIterator
